@@ -1,0 +1,5 @@
+alpha	0		bravo	delta
+bravo	2147483647		alpha	delta	charlie
+delta	2147483647		alpha	bravo
+charlie	2147483647		bravo
+delta	2147483647		bravo

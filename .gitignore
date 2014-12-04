@@ -1,3 +1,9 @@
 # IntelliJ-specific files
 .idea/
 *.iml
+
+# Text files
+*~
+
+# Target files
+target/
