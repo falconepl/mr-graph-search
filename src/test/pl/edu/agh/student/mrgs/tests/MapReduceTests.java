@@ -28,6 +28,10 @@ public class MapReduceTests {
         reduceDriver = ReduceDriver.newReduceDriver(reducer);
     }
 
+    //
+    // Mapper tests
+    //
+
     @Test
     public void testMapperForUnvisitedNode() throws IOException {
         // Input and output
@@ -84,6 +88,45 @@ public class MapReduceTests {
         mapDriver.withInput(inKey, inValue).withAllOutput(outRecords);
 
         mapDriver.runTest();
+    }
+
+    //
+    // Reducer tests
+    //
+
+    @Test
+    public void testReducerForSingleNodeData() throws IOException {
+        // Input
+        Text inKey = Utils.asText("charlie");
+
+        String backPath = Utils.backPath("alpha", "bravo");
+        String[] adjNodes = {"bravo"};
+        Text inValue = Utils.asText(2, backPath, adjNodes);
+        List<Text> inValues = Lists.newArrayList(inValue);
+
+        // Expected
+        reduceDriver.withInput(inKey, inValues).withOutput(inKey, inValue);
+
+        reduceDriver.runTest();
+    }
+
+    @Test
+    public void testReducerForMultipleNodesData() throws IOException {
+        // Input
+        Text inKey = Utils.asText("delta");
+
+        String backPath = Utils.backPath("alpha", "echo", "charlie");
+        String[] adjNodes = {"charlie", "mike"};
+        Text inValueA = Utils.asText(3, backPath, adjNodes);
+        Text inValueB = Utils.asText(5, backPath, adjNodes);
+        Text inValueC = Utils.asText(10, backPath, adjNodes);
+        List<Text> inValues =
+                Lists.newArrayList(inValueA, inValueB, inValueC);
+
+        // Expected
+        reduceDriver.withInput(inKey, inValues).withOutput(inKey, inValueA);
+
+        reduceDriver.runTest();
     }
 
 }

@@ -16,14 +16,15 @@ import java.io.IOException;
  */
 public class Utils {
 
+    public static final String SEP = "\t";
+
     public static Text asText(String node) {
         return new Text(node);
     }
 
     public static Text asText(int distance, String backPath, String... adjNodes) {
-        String sep = "\t";
-        String adjNodesStr = (adjNodes.length != 0) ? StringUtils.join(sep, adjNodes) : null;
-        String result = Joiner.on(sep).skipNulls().join(distance, backPath, adjNodesStr);
+        String adjNodesStr = (adjNodes.length != 0) ? StringUtils.join(SEP, adjNodes) : null;
+        String result = Joiner.on(SEP).skipNulls().join(distance, backPath, adjNodesStr);
         return new Text(result);
     }
 
