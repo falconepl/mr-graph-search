@@ -69,7 +69,8 @@ public class MapReduceTests {
     public void testMapperForNodeWithAdjacentNodes() throws IOException {
         // Input and output
         Text inKey = Utils.asText("echo");
-        Text inValue = Utils.asText(24, Utils.backPath("charlie", "bravo", "kilo"));
+        String backPath = "alpha";
+        Text inValue = Utils.asText(24, backPath, "charlie", "bravo", "kilo");
 
         // Additional output
         Text outKeyCharlie = Utils.asText("charlie");
