@@ -14,6 +14,8 @@ public class MapRedUtils {
 
     public static final String SEP = "\t";
 
+    public static final String TARGET_NODE = "target_node";
+
     /**
      * Transforms original input file for a MapReduce job that represents an adjacency list
      * of a graph we operate on. The input data transformation is about providing an initial

@@ -77,13 +77,14 @@ public class MapReduceTests {
         Text outKeyBravo = Utils.asText("bravo");
         Text outKeyKilo = Utils.asText("kilo");
 
-        Text outValue = Utils.asText(24 + 1, "echo");
+        Text outValue = Utils.asText(24 + 1, Utils.backPath(backPath, "echo"));
 
+        Pair<Text, Text> preservedRec = new Pair<>(inKey, inValue);
         Pair<Text, Text> charlieRec = new Pair<>(outKeyCharlie, outValue);
         Pair<Text, Text> bravoRec = new Pair<>(outKeyBravo, outValue);
         Pair<Text, Text> kiloRec = new Pair<>(outKeyKilo, outValue);
         List<Pair<Text, Text>> outRecords =
-                Lists.newArrayList(charlieRec, bravoRec, kiloRec);
+                Lists.newArrayList(preservedRec, charlieRec, bravoRec, kiloRec);
 
         // Expected
         mapDriver.withInput(inKey, inValue).withAllOutput(outRecords);
