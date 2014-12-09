@@ -18,9 +18,9 @@ public class MapRedUtilsTests {
     @Test
     public void testInputTransformation() throws IOException {
         // Setup
-        Path input = tempDir.copyResourcePath("resources/rawInputA.txt");
+        Path input = tempDir.copyResourcePath("rawInputA.txt");
         Path output = tempDir.getPath("transformedInput");
-        Path expectedOutput = tempDir.copyResourcePath("resources/transformedInputA.txt");
+        Path expectedOutput = tempDir.copyResourcePath("transformedInputA.txt");
         String startNode = "alpha";
 
         // When
