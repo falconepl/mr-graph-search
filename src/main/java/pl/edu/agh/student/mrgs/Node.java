@@ -35,6 +35,10 @@ public class Node {
         return distance;
     }
 
+    public String backPath() {
+        return backPath;
+    }
+
     public boolean hasAdjNodes() {
         return (adjNodes != null) && (adjNodes.length > 0);
     }
@@ -56,8 +60,9 @@ public class Node {
         return this;
     }
 
-    public void update(int distance, String[] adjNodes) {
+    public void update(int distance, String backPath, String[] adjNodes) {
         this.distance = distance;
+        this.backPath = backPath;
         this.adjNodes = adjNodes;
     }
 

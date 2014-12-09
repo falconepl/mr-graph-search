@@ -27,13 +27,14 @@ public class Reduce extends Reducer<Text, Text, Text, Text> {
         }
 
         if (bestNode != null && node != null) {
-            node.update(minDistance, bestNode.adjNodes());
-            context.write(key, node.toValue());
+            node.update(minDistance, bestNode.backPath(), node.adjNodes());
         }
+
+        context.write(key, node.toValue());
 
         String nodeId = key.toString();
         String targetNodeId = context.getConfiguration().get(MapRedUtils.TARGET_NODE);
-        if (nodeId.equals(targetNodeId)) {
+        if (minDistance < Distance.INFTY && nodeId.equals(targetNodeId)) {
             context.getCounter(JobProperties.STATUS).setValue(JobStatuses.FINISHED);
         }
     }
