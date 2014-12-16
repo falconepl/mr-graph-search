@@ -21,7 +21,7 @@ public class Reduce extends Reducer<Text, Text, Text, Text> {
                 bestNode = currNode;
             }
 
-            if (currNode.hasAdjNodes()) {
+            if (isOriginal(currNode)) {
                 node = currNode;
             }
         }
@@ -37,6 +37,10 @@ public class Reduce extends Reducer<Text, Text, Text, Text> {
         if (minDistance < Distance.INFTY && nodeId.equals(targetNodeId)) {
             context.getCounter(JobProperties.STATUS).setValue(JobStatuses.FINISHED);
         }
+    }
+
+    private boolean isOriginal(Node node) {
+        return node.hasAdjNodes() || (!node.hasAdjNodes() && !node.hasBackPath());
     }
 
 }

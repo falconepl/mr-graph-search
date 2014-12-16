@@ -24,7 +24,10 @@ public class Node {
 
         this.nodeId = key;
         this.distance = Integer.valueOf(parts[0]);
-        this.backPath = parts[1];
+
+        if (parts.length > 1) {
+            this.backPath = parts[1];
+        }
 
         if (parts.length > 2) {
             this.adjNodes = Arrays.copyOfRange(parts, 2, parts.length);
@@ -33,6 +36,10 @@ public class Node {
 
     public int distance() {
         return distance;
+    }
+
+    public boolean hasBackPath() {
+        return backPath != null;
     }
 
     public String backPath() {
